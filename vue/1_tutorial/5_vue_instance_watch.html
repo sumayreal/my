@@ -1,0 +1,25 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id = "app">
+	vm. a = {{ a }}
+</div>
+
+<script>
+	// 데이터 객체
+	var data = { a: 1}
+
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el : '#app',
+		data : data
+	})
+
+	// $watch는 인스턴스 메소드
+	// 다른 사용자 정의 속성과 구분하기 위해 $ 붙임 
+	vm.$watch('a', function(newVal, oldVal){
+		console.log("a changed from" + oldVal + " to " + newVal);
+	})
+
+</script>
+</html>

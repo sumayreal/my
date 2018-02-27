@@ -1,0 +1,19 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id = "app">
+	<span v-once> vm. a = {{ msg }} </span>
+</div>
+
+<script>
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			msg: '변경될까?!'
+		}
+	})
+
+</script>
+</html>

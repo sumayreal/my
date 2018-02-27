@@ -1,0 +1,21 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<!-- vbind 속성 예시 -->
+<div id = "app">
+	<a v-bind:href="url"> go to link </a>
+</div>
+
+<script>
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			url: 'https://suubreal.blog.me/',
+			rawHtml: '<span style="color:red"> This should be red.</span>'
+		}
+	})
+
+</script>
+</html>
