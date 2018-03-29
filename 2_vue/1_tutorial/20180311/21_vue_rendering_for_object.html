@@ -1,0 +1,23 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- v-for 렌더링 예시 -->
+<ul id="v-for-object" class="demo">
+	<li v-for="(value,key,index) in object">
+		{{ index }}, {{ key }} : {{ value }}
+	</li>
+</ul>
+
+<script>
+	var vm = new Vue({
+		el: '#v-for-object',
+		data: {	
+			object: {
+				firstName: 'John',
+				lastName: 'Doe',
+				age: 30
+			}
+		}
+	})
+</script>
+</html>

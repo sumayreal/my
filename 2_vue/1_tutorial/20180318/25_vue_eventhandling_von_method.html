@@ -1,0 +1,35 @@
+
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<!-- 메소드 이벤트 청취 -->
+<div id="example-2">
+	<button v-on:click="greet">Greet</button>
+</div>
+
+<script>
+	var example2 = new Vue({
+		el: '#example-2',
+		data: {
+			name: 'Vue.js'
+		},
+		// 메소드는 'methods' 객체 안에 정의 
+		methods: {
+			greet: function(event) {
+				// 메소드 안에서 사용하는 'this'는 Vue 인스턴스 가리킴
+				alert('Hello' + this.name + '!')
+
+				// 'event'는 네이티브 DOM 이벤트 
+				if (event) {
+					alert(event.target.tagName)
+				}
+			}
+		}
+	})
+</script>
+</html>
+
+
+
+

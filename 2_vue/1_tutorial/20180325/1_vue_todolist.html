@@ -1,0 +1,101 @@
+
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="todo-list-example">
+  <input 
+    v-model="newTodoText"
+    v-on:keyup.enter="addNewTodo"
+    placeholder="Add a todo"
+  >
+
+  <ul>
+    <li is="todo-item"
+        v-for="(todo, index) in todos"
+        v-bind:key="todo.id"
+        v-bind:id="todo.id"
+        v-bind:title="todo.title"
+        v-on:remove="todos.splice(index, 1)">
+    </li>
+  </ul>
+</div>
+
+
+<script>
+  Vue.component('todo-item', {
+    template: '\
+      <li>\
+        {{ id }}  / {{title}} \
+        <button v-on:click ="$emit(\'remove\')">X</button>\
+      </li>\
+    ',
+    props: ['id', 'title'],
+  })
+
+  new Vue({
+    el: '#todo-list-example',
+    data: {
+      newTodoText: '',
+      todos: [
+        {
+          id:1,
+          title:'Do the dishes',          
+        },
+        {
+          id:2,
+          title:'Take out the trash', 
+        },
+        {
+          id:3,
+          title:'Mow the lawn'
+        }
+      ],
+      nextTodoId: 4
+    },
+    methods:{
+      addNewTodo: function() {
+        this.todos.push({
+          id: this.nextTodoId++,
+          title: this.newTodoText
+        })
+      }
+    }
+  })
+
+</script>
+</html>
+
+
+
+Vue.component('example', {
+  props: {
+    // 기본 타입 확인 ('null'은 어떤 타입이든 가능하다는 의미)
+    propA: Number,
+    // 여러 개의 가능한 타입
+    propB: [String, Number],
+    // 문자열 + 필수값
+    propC: {
+      type: String,
+      required: true
+    },
+    // 숫자 + default
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 객체/배열의 기본값은 함수 사용해야 함
+    propE: {
+      type: Object,
+      default: function() {
+        return {message : 'hello'}
+      }
+    },
+    // 사용자 정의 유효성 검사 기능 
+    propF: {
+      validator: function(value) {
+        return value > 10
+      }
+    }
+  }
+})

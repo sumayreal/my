@@ -1,0 +1,23 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- v-for 렌더링 예시 -->
+<ul id="v-for-template" class="demo">
+	<template v-for="item in items">
+		<li>{{ item.msg }}</li>
+	</template>
+</ul>
+
+<script>
+	var vm = new Vue({
+		el: '#v-for-template',
+		data: {
+		  parentMessage: 'Parent',
+  		  items : [
+  		  	{ msg: 'Foo'},
+  		  	{ msg: 'Bar'}
+  		  ]
+		}
+	})
+</script>
+</html>

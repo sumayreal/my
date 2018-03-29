@@ -1,0 +1,31 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- v-if 렌더링 예시 -->
+<div id="template">
+	<div v-if="type === 'A'">
+		A
+	</div>
+	<div v-if="type === 'B'">
+		B
+	</div>
+	<div v-if="type === 'C'">
+		C
+	</div>
+	<div v-if="type === 'A'">
+		A
+	</div>
+	<div v-else>
+		Not A/B/C
+	</div>
+</div>
+
+<script>
+	var vm = new Vue({
+		el: '#template',
+		data: {
+  		  type: 'D'
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,26 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- v-for 렌더링 예시 -->
+<ul id="v-for-example-3" class="demo">
+	<li v-for="n in evenNumbers">
+		{{ n }}
+	</li>
+</ul>
+
+<script>
+	var vm = new Vue({
+		el: '#v-for-example-3',
+		data: {	
+			numbers: [ 1, 2, 3, 4, 5]
+		},
+		computed: {
+			evenNumbers: function(){
+				return this.numbers.filter(function (number) {
+					return number % 2 === 0
+				})
+			}
+		}
+	})
+</script>
+</html>

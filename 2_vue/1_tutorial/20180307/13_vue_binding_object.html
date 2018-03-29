@@ -1,0 +1,58 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<!-- 객체구문 클래스 바인딩 예시 -->
+<div id = "example" 
+	v-bind:class="{ active: isActive, 'text-danger': hasError }">
+</div>
+
+<div id = "example2"  
+	 v-bind:class="classObject">
+</div>
+
+<!-- 계산된 속성에 바인딩 예시 -->
+<div id = "example3"  
+	 v-bind:class="classObject">
+</div>
+
+<script>
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el: '#example',
+		data: {
+		  isActive: true,
+		  hasError: false
+		}
+	})
+
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el: '#example2',
+		data: {
+		   classObject: {
+		    active: false,
+		    'text-danger': false
+		  }
+		}
+	})
+
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el: '#example3',
+		data: {
+			isActive: true,
+			error: null
+		},
+		computed: {
+			classObject: function() {
+				return {
+					active: this.isActive && !this.error,
+					'text-danger' : this.error && this.error.type === 'fatal'
+				}
+			}
+		}
+	})
+
+</script>
+</html>

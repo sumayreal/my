@@ -1,0 +1,36 @@
+
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<!-- 인라인 메소드 핸들러 -->
+<div id="example-3">
+	<button v-on:click="say('hi')">Say hi</button>
+	<button v-on:click="say('what')">Say What</button>
+
+	<!-- $event변수 활용 -->
+	<button v-on:click="warn('Form cannot be submitted yet', $event)">prevent</button>
+</div>
+
+<script>
+	var example3 = new Vue({
+		el: '#example-3',
+		// 메소드는 'methods' 객체 안에 정의 
+		methods: {
+			say: function(message) {
+				alert(message)
+			},
+			warn: function(message, event) {
+				// 네이티브 이벤트에 액세스 가능
+				// preventDefault : 기본적으로 호출되는 메소드 방지
+				if (event) event.preventDefault()
+					alert(message)
+			}
+		}
+	})
+</script>
+</html>
+
+
+
+

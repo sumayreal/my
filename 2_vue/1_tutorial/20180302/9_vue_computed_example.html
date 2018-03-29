@@ -1,0 +1,34 @@
+
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<!-- 계산된 속성 예시 -->
+<div id = "example">
+	<p>원본 메시지: "{{ message }}"</p>
+	<p>뒤집히도록 계산된 메시지: "{{ reversedMessage }}"</p>
+	<p>현재시간 : "{{ now }}"</p>
+</div>
+
+<script>
+
+	// Vue인스턴스에 데이터 개체 추가
+	var vm = new Vue({
+		el: '#example',
+		data: {
+			message: '안녕하세요'
+		},
+		computed: {
+			// 계산된 getter
+			reversedMessage : function() {
+				// 'this' 는 vm 인스턴스를 가리킨다.
+				return this.message.split('').reverse().join('')
+			},
+			now : function() {
+    			return new Date()
+				//return Date.now()
+			}
+		}
+	})
+
+</script>
+</html>
