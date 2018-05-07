@@ -16,9 +16,6 @@ var port = process.env.PORT || 8081;
 var todo = require('./models/todo');
 var user = require('./models/user');
 
-// [CONFIGURE ROUTER]
-var router = require('./routes/')(app, todo, user);
-
 // [CONFIGURE mongoose]
 var db = mongoose.connection;
 db.on('error', console.error);
@@ -28,6 +25,9 @@ db.once('open', function() {
 })
 
 mongoose.connect('mongodb://localhost/semicolon_todo');
+
+// [CONFIGURE ROUTER]
+var router = require('./routes/')(app, todo, user, db);
 
 // [RUN SERVER]
 var server = app.listen(port, function() {

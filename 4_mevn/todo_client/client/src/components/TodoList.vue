@@ -1,4 +1,4 @@
-<template>
+﻿<template>
  <div>
     <div v-bind:key=todoList.type v-for="todoList in userTodoList" class="card">
       <div class="card-header">
@@ -11,7 +11,7 @@
     <div v-if="showModal">
       {{ selectedTodo }}
       {{ selectedTodo.todo[0] }}
-      <todoDetailModal :selectedTodo=selectedTodo.todo[0]>
+      <todoDetailModal @getInsertupdateDetail="insertupdateDetail(type, $event)" :selectedTodo=selectedTodo.todo[0] :selectedType=selectedType>
       </todoDetailModal>
     </div>
   </div>
@@ -44,55 +44,35 @@ export default {
     return {
       userTodoList: [],
       selectedTodo: {},
+      selectedType: 0,
       showModal: false
     }
   },
   methods: {
     todoDetail: function (type, item) {
-      console.log('item - ' + item)
-      console.log('type - ' + type)
-
-      if (item !== 0) {
-        const baseURI = 'http://localhost:8081'
-        this.loading = true
-        this.$http.post(`${baseURI}/api/todo/find`, {
-          userid: this.$route.params.userid,
-          type: type,
-          item: item
-        })
-          .then((result) => {
-            console.log(result)
-            this.loading = false
+      const baseURI = 'http://localhost:8081'
+      this.loading = true
+      this.$http.post(`${baseURI}/api/todo/find`, {
+        userid: this.$route.params.userid,
+        type: type,
+        item: item
+      })
+        .then((result) => {
+          console.log(result)
+          this.loading = false
+          this.showModal = true
+          this.selectedType = type
+          if (result.data['todo'] == null) {
+            this.selectedTodo = { 'todo': [{ item: item, content: '' }] }
+          } else {
             this.selectedTodo = result.data['todo']
-            this.showModal = true
-          }).catch(error => {
-            this.loading = false
-            console.log(error)
-          })
-      } else {
-        this.selectedTodo = {'todo': [{item: 0, content: ''}]}
-        this.showModal = true
-      }
-    },
-    insertDetail: function (event) {
-       const baseURI = 'http://localhost:8081'
-        this.loading = true
-        this.$http.post(`${baseURI}/api/todo/insert`, {
-          userid: this.$route.params.userid,
-          type: type,
-          item: item
+          }
+        }).catch(error => {
+          console.log(error)
+          this.loading = false
+          this.showModal = false
         })
-          .then((result) => {
-            console.log(result)
-            this.loading = false
-            this.selectedTodo = result.data['todo']
-            this.showModal = true
-          }).catch(error => {
-            this.loading = false
-            console.log(error)
-          })
     }
-
   }
 }
 </script>

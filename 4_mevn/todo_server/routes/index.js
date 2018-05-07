@@ -1,5 +1,5 @@
 
-module.exports = function(app, todo, user){
+module.exports = function(app, todo, user, db){
 	app.use(function(req, res, next) {
 	  res.header("Access-Control-Allow-Origin", "*");
 	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -154,20 +154,34 @@ module.exports = function(app, todo, user){
 
 	// CREATE BOOK
 	app.post('/api/todo/insert', function (req, res){
+		let result = {};
+
 		var newtodo = new todo({
 			"userid": req.body["userid"],
 			"type": req.body["type"],
-			"content": req.body["content"]		
+			"todo": req.body["todo"]		
 		});
-	
-		newtodo.save(function(err){
-			if(err){
-				console.error(err);
-				res.json({result: 0});
-				return;
-			}
 
-			res.json({result: 1});
+		console.log("userid - " + req.body["userid"]);
+		console.log("type - " + req.body["type"]);
+		console.log("todo - " + req.body["todo"]);
+
+	    let myquery = {userid: 'soobin',type: req.body["type"]};
+	    let newvalues = {$push: { todo: req.body["todo"]} };
+	  				
+	    db.collection("todos").updateOne(myquery, newvalues, function(err, todo) {
+  			if(err){
+  				console.log(err);
+				result["success"] = 0;
+				res.json(result);
+				return;
+			} else {
+				console.log(newvalues);
+				console.log(myquery);
+				console.log("else");
+				result["success"] = 1;
+				res.json(result);
+			}
 		});
 	})
 
