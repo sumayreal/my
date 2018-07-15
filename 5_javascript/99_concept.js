@@ -88,5 +88,65 @@ var greetFunc = function(name) {
 
 
 
+/*
+5. CALL, APPLY, BIND
+- 사이트 - http://www.kimsatgod.com/call-apply-bind-%EC%B0%A8%EC%9D%B4/
+- bind -> copies object and bind this to given object 
+- call -> unlike bind, it execute
+- apply -> unline call, it should send parameter with list 
+*/
+
+// 5.1
+var person = {
+	firstname: 'John',
+	lastname: 'Doe',
+	getFullName: function() {
+		var fullname = this.firstname + ' ' + this.lastname;
+		return fullname;
+	}
+}
+
+var logName = function(lang1, lang2){
+	console.log('Logged : ' + this.getFullName());
+	console.log('Arguments : ' + lang1 + ' ' + lang2);
+}
+
+logName(); 
+
+// 5.2 - bind
+var logPersonName = logName.bind(person);
+logPersonName();
+logPersonName('en');
+
+
+// 5.3 - call
+logName.call(person, 'er', 'es');
+// it set this to person 
+
+
+// 5.4 - apply
+logName.apply(person, ['en', 'es']);
+
+
+
+
+
+/*
+6. typeof, instanceof (p.44)
+- typeof : what type is 
+- instanceof : check prototype 
+*/
+
+function Person(name) {
+	this.name = name;
+}
+
+var e = new Person('Jane');
+console.log(type of e);
+console.log(e instanceof Person);
+
+
+
+
 
 

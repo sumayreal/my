@@ -5,7 +5,7 @@
 // 1
 
 function greet(firstname, lastname, language) {
-	language = language || 'en'; // default 설정 
+	// language = language || 'en'; // default 설정 
 
 	if(language === 'en')
 		console.log('Hello');
@@ -16,13 +16,19 @@ function greet(firstname, lastname, language) {
 
 // 1.1
 greet('John', 'Doe', 'en');
+greetEnglish('John', 'Doe');
+
 greet('John', 'Doe', 'es');
 
 
 // 1.2
 function greetEnglish(firstname, lastname)
+{
 	greet(firstname, lastname, 'en');
+}
 
 function greetSpanish(first, lastname)
+{
 	greet(firstname, lastname, 'es');
+}
 
