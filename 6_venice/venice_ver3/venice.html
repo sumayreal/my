@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>Venice</title>
+	<link rel="stylesheet" type="text/css" href="venice.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="venice_controller.js"></script>
+	<script type="text/javascript" src="venice_model.js"></script>
+	<script type="text/javascript" src="venice_view.js"></script>
+	<script>
+	 $(document).ready(function() {
+		  var _model = new Model();
+		  var _controller = new Controller(_model);
+		  var _view = new View(_model, _controller);
+
+  		 document.getElementById("start").addEventListener("click", function(){
+		 		_controller.startGame();
+		 		_view.gameNotification.initNotification();
+
+		 		document.getElementById("start").setAttribute("disabled","");
+		 });
+
+	 	document.getElementById("answer").addEventListener("keyup",function(event){
+			if(event.key=="Enter"){
+				_controller.checkAnswer();
+			}
+		});
+		
+	 });
+	</script>
+</head>
+<body>
+	<div id="result">
+	</div>
+
+	<!--단어가 나타나는 부분-->
+	<div class="game">
+		<div id="quiz">
+			<a class="word_temp"></a>
+		</div>
+		<div id="info">
+			<ol>
+				<li>ITEM1 : 5초 동안 정지</li>
+				<li>ITEM2 : 속도 감소</li>
+				<li>ITEM3 : 단어 초기화</li>
+			</ol>
+		</div>
+	</div>
+
+
+	<!--아이템 나타나는 부분-->
+	<!--
+	<div class = "equip">
+		<a class= "item" onclick="item1Clicked();">ITEM1</a>
+		<a class = "item" onclick="item2Clicked();" >ITEM2</a>
+		<a class = "item" onclick ="item3Clicked();">ITEM3</a>
+	</div>
+	-->
+
+
+	<!--사용자에게 보여줄 부분-->
+	<div class="user">
+		<label for="answer">ANSWER
+		<input id="answer" type="text"></label><br/>
+
+		<a>SCORE: </a>
+		<a id="score"></a><br/>
+
+		<a>FAIL: </a>
+		<a id="fail"></a><br/>
+
+		<a>LEVEL: </a>
+		<a id="level"></a><br/>
+
+		<button id="start">START GAME</button>
+	</div>
+</body>
+</html>
