@@ -90,6 +90,9 @@ app.put('/users/:id', (req, res) => {
     const name = req.body.name;
     if(!name) return res.status(400).end();
 
+    const isConflict = users.filter(user => user.name === name).length;
+    if(isConflict) return res.status(409).end();
+
     const user = users.filter(user => user.id === id)[0]; //배열 리턴 
     if(!user) return res.status(404).end();
 
