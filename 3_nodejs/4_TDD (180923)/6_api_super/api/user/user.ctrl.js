@@ -1,10 +1,6 @@
 // ctrl (controller) - api 로직
-// 데이터 
-var users = [
-    { id: 1, name: 'alice' },
-    { id: 2, name: 'bak' },
-    { id: 3, name: 'chris' }
-];
+
+const models = require('../../models');
 
 const index = function (req, res) {
     // 최대 limit 갯수만큼 응답한다 
@@ -26,7 +22,12 @@ const index = function (req, res) {
     if(Number.isNaN(limit)) {
         return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
     }
-    res.json(users.slice(0, limit));
+
+    // 모델 전체 반환 
+    models.User.findAll({})
+    	.then(users => {
+    		res.json(users);
+    	});
 }
 
 const show = function(req, res) {

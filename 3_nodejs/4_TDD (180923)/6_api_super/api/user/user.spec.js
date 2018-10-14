@@ -4,10 +4,16 @@
 const request = require('supertest');
 const should = require('should');
 const app = require('../../index'); // 상대주소로 설정 
+const models = require('../../models.js')
 
 describe('GET/users는', ()=> {
     describe('성공시', () => {
-        it('유저 객체를 담은 배열로 응답한다', (done) => {
+    	before(()=>{
+    		// sync가 비동기를 보장 
+    		return models.sequelize.sync({force: true});
+    	})
+    	// 테스트 케이스 하나만 실행 가능하도록 설정 (only)
+        it.only('유저 객체를 담은 배열로 응답한다', (done) => {
             request(app)
                 .get('/users')
                 .end((err, res)=> {
