@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var app = express();
 
@@ -9,6 +10,8 @@ var users = [
 ];
 
 app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
 
 app.get('/users', function (req, res) {
     // 최대 limit 갯수만큼 응답한다 
@@ -57,6 +60,17 @@ app.delete('/user/:id', function(req, res) {
     users = users.filter(user => user.id !== id); // 삭제 
     res.status(204).end();
 });
+
+app.post('/users', (req, res) => {
+    const name = req.body.name;
+    const id = Date.now(); // 고유한 id 만들기 위해 
+    const user = {id, name};
+
+    users.push(user);
+
+    // 201 코드로 응답, 생성된 객체 리턴 
+    res.status(201).json(user);
+})
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000');

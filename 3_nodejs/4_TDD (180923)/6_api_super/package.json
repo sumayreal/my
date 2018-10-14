@@ -13,5 +13,8 @@
     "morgan": "^1.9.1",
     "should": "^13.2.3",
     "supertest": "^3.3.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3"
   }
 }
