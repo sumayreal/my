@@ -35,7 +35,7 @@ app.get('/users', function (req, res) {
 
 app.get('/users/:id', function(req, res) {
     const id = parseInt(req.params.id, 10);    
-    // limit값이 정수가 아니라면 isNan함수 통해 검증 가능 
+    // id값이 정수가 아니라면 isNan함수 통해 검증 가능 
     if(Number.isNaN(id)) {
         return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
     }
@@ -49,6 +49,10 @@ app.get('/users/:id', function(req, res) {
 
 app.delete('/user/:id', function(req, res) {
     const id = parseInt(req.params.id, 10);    
+     // id값이 정수가 아니라면 isNan함수 통해 검증 가능 
+    if(Number.isNaN(id)) {
+        return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
+    }
 
     users = users.filter(user => user.id !== id); // 삭제 
     res.status(204).end();
