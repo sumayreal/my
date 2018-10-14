@@ -9,7 +9,7 @@ var users = [
 ];
 
 // 라우터 설정 
-app.get('/', function (req, res) {
+router.get('/', function (req, res) {
     // 최대 limit 갯수만큼 응답한다 
     // 테스트 실패
     // res.json(users);
@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
     res.json(users.slice(0, limit));
 });
 
-app.get('/users/:id', function(req, res) {
+router.get('/:id', function(req, res) {
     const id = parseInt(req.params.id, 10);    
     // id값이 정수가 아니라면 isNan함수 통해 검증 가능 
     if(Number.isNaN(id)) {
@@ -46,7 +46,7 @@ app.get('/users/:id', function(req, res) {
     res.json(user);
 });
 
-app.delete('/user/:id', function(req, res) {
+router.delete('/:id', function(req, res) {
     const id = parseInt(req.params.id, 10);    
      // id값이 정수가 아니라면 isNan함수 통해 검증 가능 
     if(Number.isNaN(id)) {
@@ -57,7 +57,7 @@ app.delete('/user/:id', function(req, res) {
     res.status(204).end();
 });
 
-app.post('/users', (req, res) => {
+router.post('/', (req, res) => {
     const name = req.body.name;
 
     // name파라미터 확인 
@@ -77,7 +77,7 @@ app.post('/users', (req, res) => {
     res.status(201).json(user);
 });
 
-app.put('/users/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
     if(Number.isNaN(id)) {
         return res.status(400).end();
@@ -96,3 +96,5 @@ app.put('/users/:id', (req, res) => {
 
     res.json(user);
 })
+
+module.exports = router;

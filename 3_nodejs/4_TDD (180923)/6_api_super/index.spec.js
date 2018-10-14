@@ -67,11 +67,11 @@ describe('GET/users/1은', ()=> {
 })
 
 
-describe('DELETE/user/1는', ()=> {
+describe('DELETE/users/1는', ()=> {
     describe('성공 시', () => {
         it('204를 응답한다', (done)=> {
             request(app)
-                .delete('/user/1')
+                .delete('/users/1')
                 .expect(204)
                 .end(done);
         })
@@ -80,7 +80,7 @@ describe('DELETE/user/1는', ()=> {
     describe('실패 시', () => {
         it('id가 숫자가 아닐 경우 400으로 응답한다', (done)=> {
             request(app)
-                .delete('/user/one')
+                .delete('/users/one')
                 .expect(400)
                 .end(done);
         })

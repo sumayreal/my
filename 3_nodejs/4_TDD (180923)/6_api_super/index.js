@@ -2,7 +2,7 @@
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var app = express();
-var user = requiere('./api/user')
+var user = require('./api/user')
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
