@@ -41,6 +41,9 @@ app.get('/users/:id', function(req, res) {
     }
 
     const user = users.filter((user) => user.id === id)[0]; // 조건에 맞는 배열 리턴 
+    // user가 업다면 undefined를 리턴할 것임 
+    if(!user) return res.status(404).end();
+
     res.json(user);
 });
 
