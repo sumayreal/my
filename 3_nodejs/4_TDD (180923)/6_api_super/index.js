@@ -79,7 +79,19 @@ app.post('/users', (req, res) => {
 
     // 201 코드로 응답, 생성된 객체 리턴 
     res.status(201).json(user);
+});
+
+app.put('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const name = req.body.name;
+
+    const user = users.filter(user => user.id === id)[0]; //배열 리턴 
+    user.name = name;
+
+    res.json(user);
 })
+
+
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000');
