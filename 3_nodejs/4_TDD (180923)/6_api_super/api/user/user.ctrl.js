@@ -85,18 +85,28 @@ const create = (req, res) => {
     // name파라미터 확인 
     if(!name) return res.status(400).end();
 
-    const isConflict = users.filter(user => user.name === name).length;
+    // json형식 
+    //const isConflict = users.filter(user => user.name === name).length;
     
+    // db형식 
+    models.User.create({name})
+    	.then(user => {
+    		res.status(201).json(user);
+    	})
+        .catch(err => {
+            if(err.name === 'SequelizeUniqueConstraintError')
+                return res.status(409).end();
+            else
+                return res.status(500).end(); // 서버 오류로 응답 
+        })
+
     // 중복 검증 
-    if(isConflict) return res.status(409).end();
+    // if(isConflict) return res.status(409).end();
 
-    const id = Date.now(); // 고유한 id 만들기 위해 
-    const user = {id, name};
-
-    users.push(user);
-
-    // 201 코드로 응답, 생성된 객체 리턴 
-    res.status(201).json(user);
+    // json형식 
+    // const id = Date.now(); // 고유한 id 만들기 위해 
+    // const user = {id, name};
+    // users.push(user);
 }
 
 const update = (req, res) => {
