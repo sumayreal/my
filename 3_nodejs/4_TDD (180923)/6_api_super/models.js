@@ -7,7 +7,10 @@ const sequelize = new Sequelize({
 
 // 첫번 째 파라미터 : 모델명, 두 번째 파라미터 : 속성 
 const User = sequelize.define('User', {
-	name: Sequelize.STRING // varchar 255
+	name: {
+		type : Sequelize.STRING, // varchar 255
+		unique: true
+	}
 });
 
 module.exports = { Sequelize, sequelize, User };

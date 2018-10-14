@@ -51,6 +51,15 @@ describe('GET/users는', ()=> {
 
 
 describe('GET/users/1은', ()=> {
+	before(()=>{
+		// sync가 비동기를 보장 
+		return models.sequelize.sync({force: true});
+	})
+	before(()=> {
+		// 데이터베이스 추가 
+		const users = [{name:'alice'}, {name:'bek'}, {name:'chris'}]
+		return models.User.bulkCreate(users);
+	})
     describe('성공 시', () => {
         it('id가 1인 유저 객체를 반환한다', (done)=> {
             request(app)
@@ -81,7 +90,16 @@ describe('GET/users/1은', ()=> {
 })
 
 
-describe.only('DELETE/users/1는', ()=> {
+describe('DELETE/users/1는', ()=> {
+	before(()=>{
+		// sync가 비동기를 보장 
+		return models.sequelize.sync({force: true});
+	})
+	before(()=> {
+		// 데이터베이스 추가 
+		const users = [{name:'alice'}, {name:'bek'}, {name:'chris'}]
+		return models.User.bulkCreate(users);
+	})
     describe('성공 시', () => {
         it('204를 응답한다', (done)=> {
             request(app)
@@ -101,7 +119,16 @@ describe.only('DELETE/users/1는', ()=> {
     })
 })
 
-describe('POST /users는 ', () => {
+describe.only('POST /users는 ', () => {
+	before(()=>{
+		// sync가 비동기를 보장 
+		return models.sequelize.sync({force: true});
+	})
+	before(()=> {
+		// 데이터베이스 추가 
+		const users = [{name:'alice'}, {name:'bek'}, {name:'chris'}]
+		return models.User.bulkCreate(users);
+	})
     describe('성공 시', () => {
         // 테스트 수트 실행 전에 미리 실행 
         let name = 'daniel';
@@ -146,6 +173,15 @@ describe('POST /users는 ', () => {
 
 
 describe('PUT /users/:id는', () => {
+	before(()=>{
+		// sync가 비동기를 보장 
+		return models.sequelize.sync({force: true});
+	})
+	before(()=> {
+		// 데이터베이스 추가 
+		const users = [{name:'alice'}, {name:'bek'}, {name:'chris'}]
+		return models.User.bulkCreate(users);
+	})
     describe('성공 시', () => {
         it('변경된 name을 응답한다', (done) => {
             const name = 'chally';
