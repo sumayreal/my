@@ -63,6 +63,9 @@ app.delete('/user/:id', function(req, res) {
 
 app.post('/users', (req, res) => {
     const name = req.body.name;
+
+    if(!name) return res.status(400).end();
+
     const id = Date.now(); // 고유한 id 만들기 위해 
     const user = {id, name};
 
