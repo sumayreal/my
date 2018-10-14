@@ -87,3 +87,29 @@ describe('DELETE/user/1는', ()=> {
     })
 })
 
+describe('POST /users는 ', () => {
+    describe('성공 시', () => {
+        // 테스트 수트 실행 전에 미리 실행 
+        let name = 'daniel';
+        let body;
+        before(done=>{
+            request(app)
+                .post('/users')
+                .send({name})
+                .expect(201) // 201 상태코드 확인 
+                .end((err, res) => {
+                    body = res.body;
+                    done();
+                });
+        });
+        it('생성된 user객체를 반환한다', () => {
+            // 비동기 테스트 아니므로 done사용하지 않음 
+            body.should.have.property('id');
+        });
+        it('입력한 name을 반환한다', () => {
+            // 비동기 테스트 아니므로 done사용하지 않음 
+            body.should.have.property('name', name);
+        })
+    })
+})
+
