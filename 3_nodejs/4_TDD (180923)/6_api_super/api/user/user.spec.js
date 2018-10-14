@@ -7,7 +7,7 @@ const app = require('../../index'); // 상대주소로 설정
 const models = require('../../models.js')
 
 describe('GET/users는', ()=> {
-    describe.only('성공시', () => {
+    describe('성공시', () => {
     	before(()=>{
     		// sync가 비동기를 보장 
     		return models.sequelize.sync({force: true});
@@ -50,7 +50,7 @@ describe('GET/users는', ()=> {
 })
 
 
-describe('GET/users/1은', ()=> {
+describe.only('GET/users/1은', ()=> {
     describe('성공 시', () => {
         it('id가 1인 유저 객체를 반환한다', (done)=> {
             request(app)

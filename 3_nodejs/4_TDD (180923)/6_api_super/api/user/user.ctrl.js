@@ -26,7 +26,7 @@ const index = function (req, res) {
     // 모델 전체 반환 
     models.User
     	.findAll({
-    		limit: limit // limit 전달 
+    		limit: limit // limit 전달
     	})
     	.then(users => {
     		res.json(users);
@@ -40,11 +40,22 @@ const show = function(req, res) {
         return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
     }
 
-    const user = users.filter((user) => user.id === id)[0]; // 조건에 맞는 배열 리턴 
-    // user가 업다면 undefined를 리턴할 것임 
-    if(!user) return res.status(404).end();
+	// db형식 
+    models.User.findOne({
+    	where: {
+    		id: id // id찾는 부분 
+    	}
+    }).then(user => {
+    	if(!user) return res.status(404).end();
+    	res.json(user);
+    })
 
-    res.json(user);
+    // json형식 
+    // const user = users.filter((user) => user.id === id)[0]; // 조건에 맞는 배열 리턴 
+    // // user가 업다면 undefined를 리턴할 것임 
+    // if(!user) return res.status(404).end();
+	// 
+    // res.json(user);
 }
 
 const destroy = function(req, res) {
