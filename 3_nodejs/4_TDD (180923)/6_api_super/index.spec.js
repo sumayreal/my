@@ -113,7 +113,7 @@ describe('POST /users는 ', () => {
     })
 
     describe('실패 시', () => {
-        it('name 파라키터 누락 시 400을 반환한다', (done) => {
+        it('name 파라미터 누락 시 400을 반환한다', (done) => {
             request(app)
                 .post('/users')
                 .send({})
