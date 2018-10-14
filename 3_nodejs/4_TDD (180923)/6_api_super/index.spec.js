@@ -34,3 +34,19 @@ describe('GET/users는', ()=> {
         })
     })
 })
+
+
+
+describe('GET/users/1은', ()=> {
+    describe('성공 시', () => {
+        it('id가 1인 유저 객체를 반환한다', (done)=> {
+            request(app)
+                .get('/users/1')
+                .end((err,res) => {
+                    res.body.should.have.property('id', 1);
+                    // 첫번 째 파라미터에 기대하는 변수, 두번 째 파라미터에 기대하는 값ㅞ
+                    done();
+                })
+        });
+    })
+})
