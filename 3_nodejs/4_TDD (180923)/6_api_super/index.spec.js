@@ -169,8 +169,8 @@ describe('PUT /users/:id는', () => {
         it('이름이 중복일 경우 409를 응답한다', (done) => {
             request(app)
                 .put('/users/2')
-                .send({name: 'bek'})
-                .expect(404)
+                .send({name: 'bak'})
+                .expect(409)
                 .end(done);
         });
     })
