@@ -64,7 +64,13 @@ app.delete('/user/:id', function(req, res) {
 app.post('/users', (req, res) => {
     const name = req.body.name;
 
+    // name파라미터 확인 
     if(!name) return res.status(400).end();
+
+    const isConflict = users.filter(user => user.name === name).length;
+    
+    // 중복 검증 
+    if(isConflict) return res.status(409).end();
 
     const id = Date.now(); // 고유한 id 만들기 위해 
     const user = {id, name};
