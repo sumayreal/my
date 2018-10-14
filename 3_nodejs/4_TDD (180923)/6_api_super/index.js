@@ -34,7 +34,12 @@ app.get('/users', function (req, res) {
 });
 
 app.get('/users/:id', function(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);    
+    // limit값이 정수가 아니라면 isNan함수 통해 검증 가능 
+    if(Number.isNaN(id)) {
+        return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
+    }
+
     const user = users.filter((user) => user.id === id)[0]; // 조건에 맞는 배열 리턴 
     res.json(user);
 });
