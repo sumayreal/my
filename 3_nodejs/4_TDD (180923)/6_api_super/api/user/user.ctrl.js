@@ -118,15 +118,32 @@ const update = (req, res) => {
     const name = req.body.name;
     if(!name) return res.status(400).end();
 
-    const isConflict = users.filter(user => user.name === name).length;
-    if(isConflict) return res.status(409).end();
+    // db형식
+    models.User.findOne({where : {id}})
+        .then(user => {
+            if(!user) return res.status(404).end();
 
-    const user = users.filter(user => user.id === id)[0]; //배열 리턴 
-    if(!user) return res.status(404).end();
+            user.name = name;
+            // user 저장 
+            user.save()
+                .then(_=> {
+                    res.json(user);
+                })
+                .catch(err => {
+                    if(err.name === 'SequelizeUniqueConstraintError')
+                        return res.status(409).end();
+                    else
+                        return res.status(500).end(); // 서버 오류로 응답 
+                })
+        })
 
-    user.name = name;
-
-    res.json(user);
+    // json형식 
+    // const isConflict = users.filter(user => user.name === name).length;
+    // if(isConflict) return res.status(409).end();
+    // const user = users.filter(user => user.id === id)[0]; //배열 리턴 
+    // if(!user) return res.status(404).end();
+    // user.name = name;
+    // res.json(user);
 }
 
 // module.exports = {

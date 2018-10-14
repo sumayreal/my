@@ -119,7 +119,7 @@ describe('DELETE/users/1는', ()=> {
     })
 })
 
-describe.only('POST /users는 ', () => {
+describe('POST /users는 ', () => {
 	before(()=>{
 		// sync가 비동기를 보장 
 		return models.sequelize.sync({force: true});
@@ -219,7 +219,7 @@ describe('PUT /users/:id는', () => {
         it('이름이 중복일 경우 409를 응답한다', (done) => {
             request(app)
                 .put('/users/2')
-                .send({name: 'bak'})
+                .send({name: 'chally'})
                 .expect(409)
                 .end(done);
         });
