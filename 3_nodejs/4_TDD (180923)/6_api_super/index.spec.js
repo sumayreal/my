@@ -111,5 +111,22 @@ describe('POST /users는 ', () => {
             body.should.have.property('name', name);
         })
     })
+
+    describe('실패 시', () => {
+        it('name 파라키터 누락 시 400을 반환한다', (done) => {
+            request(app)
+                .post('/users')
+                .send({})
+                .expect(400)
+                .end(done);
+        });
+        it('name이 중복일 경우 400을 반환한다', (done) => {
+            request(app)
+                .post('/users')
+                .send({name : 'alice'})
+                .expect(400)
+                .end(done);
+        })
+    })
 })
 
