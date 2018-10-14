@@ -65,8 +65,18 @@ const destroy = function(req, res) {
         return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
     }
 
-    users = users.filter(user => user.id !== id); // 삭제 
-    res.status(204).end();
+	// db형식 
+    models.User.destroy({
+    	where: {
+    		id: id // id찾는 부분 
+    	}
+    }).then(user => {
+    	res.status(204).end();
+    })
+
+    // json형식 
+    // users = users.filter(user => user.id !== id); // 삭제 
+    // res.status(204).end();
 }
 
 const create = (req, res) => {
