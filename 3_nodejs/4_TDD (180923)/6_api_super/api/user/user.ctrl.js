@@ -24,7 +24,10 @@ const index = function (req, res) {
     }
 
     // 모델 전체 반환 
-    models.User.findAll({})
+    models.User
+    	.findAll({
+    		limit: limit // limit 전달 
+    	})
     	.then(users => {
     		res.json(users);
     	});
