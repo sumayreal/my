@@ -31,7 +31,12 @@ app.get('/users', function (req, res) {
         return res.status(400).end(); // 별도 설정해 주지 않으면 200 리턴 
     }
     res.json(users.slice(0, limit));
+});
 
+app.get('/users/:id', function(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const user = users.filter((user) => user.id === id)[0]; // 조건에 맞는 배열 리턴 
+    res.json(user);
 });
 
 app.listen(3000, function () {
